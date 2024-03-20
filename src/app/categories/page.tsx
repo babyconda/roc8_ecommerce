@@ -17,7 +17,7 @@ export default function Categories() {
   const [page, setPage] = useState(1);
   const [selectedSongs, setSelectedSongs] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
-
+  console.log(selectedSongs);
   const getFakeData = async () => {
     try {
       setLoading(true);
@@ -35,47 +35,15 @@ export default function Categories() {
     getFakeData();
   }, []);
 
-  // useEffect(() => {
-  //   if (selectedSongs?.length > 0) {
-  //     const debounceTimeout = setTimeout(() => {
-  //       saveData();
-  //     }, 500);
-
-  //     return () => clearTimeout(debounceTimeout);
-  //   }
-  // }, [selectedSongs]);
-
-  const testDebounce = () => {
-    const debounceTimeout = setTimeout(() => {
-      saveData();
-    }, 500);
-
-    return () => clearTimeout(debounceTimeout);
-  };
-
   const selectPageHandler = (selectedPage: number) => {
     if (selectedPage >= 1 && selectedPage <= fakeData?.length / 7) {
       setPage(selectedPage);
     }
   };
 
-  const getData = async () => {
-    try {
-      const response = await axios.get("api/users/get-data");
-      setSelectedSongs(response?.data?.savedData);
-    } catch (error: any) {
-      toast.error(error?.response?.data?.error);
-    }
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
-
   const saveData = async () => {
     try {
       const response = await axios.post("api/users/save-data", selectedSongs);
-      setSelectedSongs(response?.data?.interests);
     } catch (error: any) {
       toast.error(error?.response?.data?.error);
     }
@@ -87,7 +55,7 @@ export default function Categories() {
     } else {
       setSelectedSongs([...selectedSongs, id]);
     }
-    testDebounce();
+    saveData();
   };
 
   return (
