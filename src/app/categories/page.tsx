@@ -60,9 +60,9 @@ export default function Categories() {
     }
   };
 
-  useEffect(() => {
-    getData();
-  }, []);
+  // useEffect(() => {
+  //   getData();
+  // }, []);
 
   const saveData = async () => {
     try {
