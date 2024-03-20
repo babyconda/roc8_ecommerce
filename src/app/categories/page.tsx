@@ -79,7 +79,6 @@ export default function Categories() {
     } catch (error: any) {
       toast.error(error?.response?.data?.error);
     }
-    testDebounce();
   };
 
   const handleCheckboxChange = (id: string) => {
@@ -88,6 +87,7 @@ export default function Categories() {
     } else {
       setSelectedSongs([...selectedSongs, id]);
     }
+    testDebounce();
   };
 
   return (
