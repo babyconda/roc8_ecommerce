@@ -9,22 +9,23 @@ export async function POST(request: NextRequest, response: NextResponse) {
 
     const userId = await getDataFromToken(request);
 
-    const updateUserIntrest = await prisma.user.update({
-      where: {
-        id: userId,
-      },
-      data: {
-        interests: reqBody,
-      },
-    });
+    if (userId) {
+      const updateUserIntrest = await prisma.user.update({
+        where: {
+          id: userId,
+        },
+        data: {
+          interests: reqBody,
+        },
+      });
 
-    const { interests } = updateUserIntrest;
-
-    return NextResponse.json({
-      message: "Registration Successful",
-      success: true,
-      interests,
-    });
+      const { interests } = updateUserIntrest;
+      return NextResponse.json({
+        message: "Data saved",
+        success: true,
+        interests,
+      });
+    }
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
