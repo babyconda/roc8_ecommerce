@@ -46,13 +46,11 @@ export default function Categories() {
   // }, [selectedSongs]);
 
   const testDebounce = () => {
-    if (selectedSongs?.length > 0) {
-      const debounceTimeout = setTimeout(() => {
-        saveData();
-      }, 500);
+    const debounceTimeout = setTimeout(() => {
+      saveData();
+    }, 500);
 
-      return () => clearTimeout(debounceTimeout);
-    }
+    return () => clearTimeout(debounceTimeout);
   };
 
   const selectPageHandler = (selectedPage: number) => {
