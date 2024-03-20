@@ -35,7 +35,17 @@ export default function Categories() {
     getFakeData();
   }, []);
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   if (selectedSongs?.length > 0) {
+  //     const debounceTimeout = setTimeout(() => {
+  //       saveData();
+  //     }, 500);
+
+  //     return () => clearTimeout(debounceTimeout);
+  //   }
+  // }, [selectedSongs]);
+
+  const testDebounce = () => {
     if (selectedSongs?.length > 0) {
       const debounceTimeout = setTimeout(() => {
         saveData();
@@ -43,7 +53,7 @@ export default function Categories() {
 
       return () => clearTimeout(debounceTimeout);
     }
-  }, [selectedSongs]);
+  };
 
   const selectPageHandler = (selectedPage: number) => {
     if (selectedPage >= 1 && selectedPage <= fakeData?.length / 7) {
@@ -60,9 +70,9 @@ export default function Categories() {
     }
   };
 
-  // useEffect(() => {
-  //   getData();
-  // }, []);
+  useEffect(() => {
+    getData();
+  }, []);
 
   const saveData = async () => {
     try {
@@ -71,6 +81,7 @@ export default function Categories() {
     } catch (error: any) {
       toast.error(error?.response?.data?.error);
     }
+    testDebounce();
   };
 
   const handleCheckboxChange = (id: string) => {
